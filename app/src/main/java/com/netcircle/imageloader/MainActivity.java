@@ -1,14 +1,13 @@
 package com.netcircle.imageloader;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.netcircle.imageloader.adapter.MyRecyclerViewAdapter;
 import com.netcircle.imageloader.model.ListImageItem;
@@ -37,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mRefreshLayout;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private int pages=1;
+
+    private final int TOP_REFRESH = 1;
+    private final int BOTTOM_REFRESH = 2;
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
@@ -78,11 +81,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //每次上拉加载的时候，给RecyclerView的后面添加了10条数据数据
+    //下啦加载
     private void loadMoreData(){
+        dataOption(BOTTOM_REFRESH);
         for (int i =0; i < 10; i++){
             myRecyclerViewAdapter.notifyDataSetChanged();
         }
+        Toast.makeText(this,"加载完成",Toast.LENGTH_SHORT).show();
+    }
+
+    private void dataOption(int option){
+        switch (option) {
+            case TOP_REFRESH:
+                //下拉刷新
+                imageItemList.clear();
+                doGet();
+                break;
+            case BOTTOM_REFRESH:
+                //上拉加载更多
+                pages++;
+                doGet();
+                break;
+        }
+
     }
 
     public void initView(){

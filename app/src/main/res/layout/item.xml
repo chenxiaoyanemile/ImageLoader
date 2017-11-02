@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="3dp"
-    android:background="#000000">
+    >
 
     <com.netcircle.imageloader.view.SmartImageView
         android:layout_width="wrap_content"
