@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     public List<ListImageItem> getImageURL(String arr[]){
         for (int i = 0; i < arr.length - 6; i = i+3){
             Log.i("getImageURL","arr"+arr[i]+arr[i+1]+arr[i+3]);
-            ListImageItem listImageItem = new ListImageItem(arr[i],arr[i+1],arr[i+3]);
+            ListImageItem listImageItem = new ListImageItem(arr[i],arr[i+1],arr[i+2]);
             imageItemList.add(listImageItem);
         }
         return imageItemList;
