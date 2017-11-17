@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
-    private String[] urlArray ;  //url数组
+    private String[] urlArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

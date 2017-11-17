@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //取消注册事件
+
         EventBus.getDefault().unregister(this);
     }
 

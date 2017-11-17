@@ -7,7 +7,6 @@ import com.netcircle.imageloader.gen.DaoMaster;
 import com.netcircle.imageloader.gen.DaoSession;
 import com.netcircle.imageloader.gen.UserDao;
 
-
 public class MyApplication extends Application {
     private DaoMaster.DevOpenHelper mHelper;
     private SQLiteDatabase db;

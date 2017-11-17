@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Transient;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by sweetgirl on 2017/11/17
+ * Created on 2017/11/17
  */
 @Entity
 public class User {

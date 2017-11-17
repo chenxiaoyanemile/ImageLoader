@@ -109,11 +109,7 @@ public class RegisteredActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * is null
-     * @param s
-     * @return
-     */
+
     private boolean isEmpty(String s) {
         if (isNotEmpty(s)) {
             return false;
