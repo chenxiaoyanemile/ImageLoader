@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
-import com.netcircle.imageloader.util.ImageSizeUtil;
 
 import java.io.BufferedInputStream;
 import java.io.File;

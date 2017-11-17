@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
+    <color name="role_yellow_gray">#33CC99</color>
+    <color name="toast_white">#fffff0</color>
 </resources>

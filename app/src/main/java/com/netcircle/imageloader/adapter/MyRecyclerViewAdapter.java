@@ -3,9 +3,6 @@ package com.netcircle.imageloader.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,6 @@ import com.netcircle.imageloader.model.ListImageItem;
 import com.netcircle.imageloader.util.VolleySingleton;
 
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**

@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="LoginButton">
+        <item name="android:background">@drawable/selector_login_button</item>
+        <item name="android:textColor">@color/toast_white</item>
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
 </resources>
