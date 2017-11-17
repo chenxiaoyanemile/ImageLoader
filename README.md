@@ -1,7 +1,8 @@
 ### Imageloader
 ### [1]RecyclerView 
 display image
-###[2]Using the Greendao framework and SQLite 
+
+### [2]Using the Greendao framework and SQLite 
 to do not need to enter the user name and password after registration, direct access to the database data display
 
 ### 效果图
