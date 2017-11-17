@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
-    private String[] urlArray ;  //url数组
+    private String[] urlArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initView(){
-        Log.i("TAG","视图");
 
         mRecyclerView=(RecyclerView) findViewById(R.id.new_recyclerView);
         mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.layout_swipe_refresh);
