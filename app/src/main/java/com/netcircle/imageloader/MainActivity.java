@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initView(){
-        Log.i("TAG","视图");
 
         mRecyclerView=(RecyclerView) findViewById(R.id.new_recyclerView);
         mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.layout_swipe_refresh);

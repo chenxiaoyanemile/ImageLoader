@@ -7,9 +7,6 @@ import com.netcircle.imageloader.gen.DaoMaster;
 import com.netcircle.imageloader.gen.DaoSession;
 import com.netcircle.imageloader.gen.UserDao;
 
-/**
- * Created by sweetgirl on 2017/11/17
- */
 
 public class MyApplication extends Application {
     private DaoMaster.DevOpenHelper mHelper;
