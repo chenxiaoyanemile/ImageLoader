@@ -1,17 +1,10 @@
 ### Imageloader
-### [1]RecyclerView 
+### [1] RecyclerView 
 display image
-<<<<<<< HEAD
-### [2]Using the Greendao framework and SQLite 
-=======
-<<<<<<< HEAD
-###[2]Using the Greendao framework and SQLite 
-=======
-
-### [2]Using the Greendao framework and SQLite 
->>>>>>> 23d8446e425656177405021f2c876b5d1ba772c1
->>>>>>> apple
+### [2] Greendao and SQLite 
 to do not need to enter the user name and password after registration, direct access to the database data display
+### [3] Volley
+### [4] Picasso
 
 ### 效果图
 -登录
@@ -36,12 +29,4 @@ to do not need to enter the user name and password after registration, direct ac
 
 - 夜晚模式
 
-<<<<<<< HEAD
 >![QQ20171102-11.jpg](http://upload-images.jianshu.io/upload_images/2245754-a0ca210d23036ac3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-=======
-<<<<<<< HEAD
->![QQ20171102-11.jpg](http://upload-images.jianshu.io/upload_images/2245754-a0ca210d23036ac3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-=======
->![QQ20171102-11.jpg](http://upload-images.jianshu.io/upload_images/2245754-a0ca210d23036ac3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
->>>>>>> 23d8446e425656177405021f2c876b5d1ba772c1
->>>>>>> apple
