@@ -16,9 +16,12 @@ import com.netcircle.imageloader.app.Constants;
 import com.netcircle.imageloader.R;
 import com.netcircle.imageloader.model.ListImageItem;
 import com.netcircle.imageloader.util.VolleySingleton;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
+
+import static android.R.id.list;
 
 /**
  * Created by sweetgirl on 2017/11/2
@@ -79,6 +82,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         loadImages(url1,holder.mImage01);
         loadImages(url2,holder.mImage02);
         loadImages(url3,holder.mImage03);
+
+        Picasso.with(mContext)
+                //load()下载图片
+                .load(imageItems.get(position).getImage_url_01())
+                //init()显示到指定控件
+                .into(holder.mImage01);
 
     }
 
