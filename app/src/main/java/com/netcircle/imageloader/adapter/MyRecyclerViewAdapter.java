@@ -79,9 +79,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         String  url2 = currentTextImage.getImage_url_02();
         String  url3 = currentTextImage.getImage_url_03();
 
-        loadImages(url1,holder.mImage01);
-        loadImages(url2,holder.mImage02);
-        loadImages(url3,holder.mImage03);
+       // loadImages(url1,holder.mImage01);
+       // loadImages(url2,holder.mImage02);
+       // loadImages(url3,holder.mImage03);
 
         Picasso.with(mContext)
                 //load()下载图片
