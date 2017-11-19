@@ -76,8 +76,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.itemView.setTag(position);
 
         String  url1=currentTextImage.getImage_url_01();
-        String  url2 = currentTextImage.getImage_url_02();
-        String  url3 = currentTextImage.getImage_url_03();
+       /* String  url2 = currentTextImage.getImage_url_02();
+        String  url3 = currentTextImage.getImage_url_03();*/
 
        // loadImages(url1,holder.mImage01);
        // loadImages(url2,holder.mImage02);
@@ -125,14 +125,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     class ViewHolder extends RecyclerView.ViewHolder{
         ImageView mImage01;
-        ImageView mImage02;
-        ImageView mImage03;
+       /* ImageView mImage02;
+        ImageView mImage03;*/
 
         public ViewHolder(View itemView){
             super(itemView);
             mImage01 = (ImageView)itemView.findViewById(R.id.im_item_01);
+            /*
             mImage02 = (ImageView)itemView.findViewById(R.id.im_item_02);
-            mImage03=(ImageView)itemView.findViewById(R.id.im_item_03);
+            mImage03=(ImageView)itemView.findViewById(R.id.im_item_03);*/
 
 
            itemView.setOnClickListener(new View.OnClickListener() {

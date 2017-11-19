@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
-    private String[] urlArray ;
+    //private String[] urlArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
                     parseData(result);
 
-                    getImageURL(urlArray);
+                    //getImageURL(urlArray);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -164,13 +164,13 @@ public class MainActivity extends AppCompatActivity {
         try {
             JSONTokener jsonTokener = new JSONTokener(jsonData);
             JSONArray array =(JSONArray) jsonTokener.nextValue();
-            urlArray = new String[array.length()];
+            //urlArray = new String[array.length()];
             for (int i =0; i< array.length(); i++){
                 JSONObject object = array.getJSONObject(i);
                 JSONObject images = object.getJSONObject("images");
                 String teaser = images.getString("teaser");
-                urlArray[i] = teaser;
-                Log.i("parseData","teaser"+urlArray[i]+i);
+                ListImageItem listImageItem = new ListImageItem(teaser);
+                imageItemList.add(listImageItem);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -178,11 +178,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
+  /*  *//**
      * get url
      * @param arr image url array
      * @return
-     */
+     *//*
     public List<ListImageItem> getImageURL(String arr[]){
         for (int i = 0; i < arr.length - 6; i = i+3){
             Log.i("getImageURL","arr"+arr[i]+arr[i+1]+arr[i+3]);
@@ -190,5 +190,5 @@ public class MainActivity extends AppCompatActivity {
             imageItemList.add(listImageItem);
         }
         return imageItemList;
-    }
+    }*/
 }
