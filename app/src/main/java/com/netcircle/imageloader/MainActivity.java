@@ -3,6 +3,7 @@ package com.netcircle.imageloader;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mRefreshLayout;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    private GridLayoutManager mLayoutManager;
     private int pages=1;
 
     private final int TOP_REFRESH = 1;
@@ -53,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
         initView();
         doGet();
 
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.VERTICAL, false);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(MainActivity.this);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(myRecyclerViewAdapter);
         myRecyclerViewAdapter.setTextImages(imageItemList);
 
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView.addOnScrollListener(new EndLessOnScrollListener(mLinearLayoutManager) {
+        mRecyclerView.addOnScrollListener(new EndLessOnScrollListener(mLayoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
                 loadMoreData();
