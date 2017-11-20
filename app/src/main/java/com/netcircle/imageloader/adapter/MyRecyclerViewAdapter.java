@@ -75,7 +75,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         ListImageItem currentTextImage=imageItems.get(position);
         holder.itemView.setTag(position);
 
-        String  url1=currentTextImage.getImage_url_01();
+        //String  url1=currentTextImage.getImage_url_01();
        /* String  url2 = currentTextImage.getImage_url_02();
         String  url3 = currentTextImage.getImage_url_03();*/
 
@@ -149,7 +149,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     public interface OnItemClickListener{
-        public void OnItemClick(View view,int position);
+         void OnItemClick(View view,int position);
     }
 
     private OnItemClickListener onItemClickListener;

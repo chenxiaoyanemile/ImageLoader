@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         doGet();
 
-        mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.VERTICAL, false);
+        mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.HORIZONTAL, false);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(MainActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(myRecyclerViewAdapter);
