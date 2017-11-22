@@ -4,15 +4,29 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.netcircle.imageloader.adapter.MyRecyclerViewAdapter;
+import com.netcircle.imageloader.app.MyApplication;
+import com.netcircle.imageloader.model.ImageJsonBean;
+import com.netcircle.imageloader.model.ImagesBean;
 import com.netcircle.imageloader.model.ListImageItem;
 import com.netcircle.imageloader.util.EndLessOnScrollListener;
+import com.netcircle.imageloader.util.VolleyRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,17 +34,16 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private String path = "https://api.dribbble.com/v1/shots?sort=recent&page=1&per_page=30";
     private String token = "a62b88ea291c0d0e5b9295fdb8930936f945027bb84ff747ef6b89f8a9cd4da1";
-    private static final OkHttpClient mOkHttpClient = new OkHttpClient();
+    //private static final OkHttpClient mOkHttpClient = new OkHttpClient();
 
     String result;
 
@@ -45,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
-    //private String[] urlArray ;
+    private Gson mGson;
+    RequestQueue mQueue;
+    StringRequest mStringRequest;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
-        doGet();
 
-        mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.HORIZONTAL, false);
+        getVolleyData();
+        Log.i("获取数据","getVolleyData");
+
+        mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.VERTICAL, false);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(MainActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(myRecyclerViewAdapter);
@@ -121,11 +140,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
 
-                    getData(token,path);
-
-                    parseData(result);
-
-                    //getImageURL(urlArray);
+                    getVolleyData();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -135,12 +150,57 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    /**
+
+    private void getVolleyData(){
+
+        VolleyRequest.MyStringRequest myStringRequest = new VolleyRequest.MyStringRequest(
+                Request.Method.GET, path, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                // TODO Auto-generated method stub
+
+                Log.i("TAG","getVolleyData"+response);
+                //Json的解析类对象
+                JsonParser parser = new JsonParser();
+                //将JSON的String 转成一个JsonArray对象
+                JsonArray jsonArray = parser.parse(response).getAsJsonArray();
+                Gson gson = new Gson();
+                ArrayList<ImageJsonBean> imageJsonBeanArrayList = new ArrayList<>();
+                for (JsonElement user : jsonArray) {
+                    //使用GSON，直接转成Bean对象
+                    ImageJsonBean imageJsonBean = gson.fromJson(user, ImageJsonBean.class);
+                    ImagesBean imagesBean = imageJsonBean.getImages();
+                    String imageUrl = imagesBean.getTeaser();
+                    Log.i("imageUrl","imageUrl="+imageUrl);
+                    ListImageItem listImageItem = new ListImageItem(imageUrl);
+                    imageItemList.add(listImageItem);
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("error>", error.toString());
+
+            }
+        });
+        myStringRequest.headers.put("Authorization", "Bearer "+token);
+        MyApplication.getHttpQueues().add(myStringRequest);
+    }
+
+
+
+
+/*
+    *//**
      * Get data
      * @param token token
      * @param url url
      * @throws Exception
-     */
+     *//*
     public void getData(String token, String url) throws Exception {
 
         Request request = new Request.Builder()
@@ -155,16 +215,15 @@ public class MainActivity extends AppCompatActivity {
         result = response.body().string();
     }
 
-    /**
+    *//**
      * parse data
      * @param jsonData json data
      * @return  list
-     */
+     *//*
     public void parseData(String jsonData){
         try {
             JSONTokener jsonTokener = new JSONTokener(jsonData);
             JSONArray array =(JSONArray) jsonTokener.nextValue();
-            //urlArray = new String[array.length()];
             for (int i =0; i< array.length(); i++){
                 JSONObject object = array.getJSONObject(i);
                 JSONObject images = object.getJSONObject("images");
@@ -176,19 +235,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }
-
-  /*  *//**
-     * get url
-     * @param arr image url array
-     * @return
-     *//*
-    public List<ListImageItem> getImageURL(String arr[]){
-        for (int i = 0; i < arr.length - 6; i = i+3){
-            Log.i("getImageURL","arr"+arr[i]+arr[i+1]+arr[i+3]);
-            ListImageItem listImageItem = new ListImageItem(arr[i],arr[i+1],arr[i+2]);
-            imageItemList.add(listImageItem);
-        }
-        return imageItemList;
     }*/
+
+
 }

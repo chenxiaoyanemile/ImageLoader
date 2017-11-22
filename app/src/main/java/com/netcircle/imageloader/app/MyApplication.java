@@ -3,6 +3,8 @@ package com.netcircle.imageloader.app;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.netcircle.imageloader.gen.DaoMaster;
 import com.netcircle.imageloader.gen.DaoSession;
 import com.netcircle.imageloader.gen.UserDao;
@@ -13,12 +15,14 @@ public class MyApplication extends Application {
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
     private UserDao mUserDao;
+    public static RequestQueue queues;
 
     public static MyApplication instances;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        queues = Volley.newRequestQueue(getApplicationContext());
         instances = this;
         setDatabase();
 
@@ -36,6 +40,11 @@ public class MyApplication extends Application {
         mDaoMaster = new DaoMaster(db);
         mDaoSession = mDaoMaster.newSession();
         mUserDao = mDaoSession.getUserDao();
+    }
+
+    public static RequestQueue getHttpQueues() {
+        return queues;
+
     }
 
     public DaoSession getDaoSession() {
