@@ -5,7 +5,8 @@ display image
 to do not need to enter the user name and password after registration, direct access to the database data display
 ### [3] Volley
 ### [4] Picasso
-### [4] eventbus
+### [5] Eventbus
+### [6] Gson
 
 ### 效果图
 -登录
