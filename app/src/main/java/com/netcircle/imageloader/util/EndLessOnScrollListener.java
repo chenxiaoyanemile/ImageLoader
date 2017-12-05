@@ -2,7 +2,6 @@ package com.netcircle.imageloader.util;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 /**
  * Created by sweetgirl on 2017/11/2

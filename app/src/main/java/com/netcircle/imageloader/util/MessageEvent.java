@@ -6,17 +6,17 @@ package com.netcircle.imageloader.util;
 
 public class MessageEvent {
 
-    private String message;
+    private String msg;
 
     public MessageEvent(String message) {
-        this.message = message;
+        msg = message;
     }
 
     public String getMessage() {
-        return message;
+        return msg;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.msg = message;
     }
 }

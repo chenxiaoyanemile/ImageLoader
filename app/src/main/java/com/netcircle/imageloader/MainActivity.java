@@ -9,13 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -27,25 +23,15 @@ import com.netcircle.imageloader.model.ImagesBean;
 import com.netcircle.imageloader.model.ListImageItem;
 import com.netcircle.imageloader.util.EndLessOnScrollListener;
 import com.netcircle.imageloader.util.VolleyRequest;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     private String path = "https://api.dribbble.com/v1/shots?sort=recent&page=1&per_page=30";
     private String token = "a62b88ea291c0d0e5b9295fdb8930936f945027bb84ff747ef6b89f8a9cd4da1";
-    //private static final OkHttpClient mOkHttpClient = new OkHttpClient();
 
-    String result;
 
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mRefreshLayout;
@@ -58,11 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<ListImageItem> imageItemList = new ArrayList<>();
 
-    private Gson mGson;
-    RequestQueue mQueue;
-    StringRequest mStringRequest;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         getVolleyData();
-        Log.i("获取数据","getVolleyData");
 
         mLayoutManager = new GridLayoutManager(MainActivity.this, 3, GridLayoutManager.VERTICAL, false);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(MainActivity.this);
@@ -102,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //下啦加载
     private void loadMoreData(){
         dataOption(BOTTOM_REFRESH);
         for (int i =0; i < 10; i++){
@@ -114,12 +93,10 @@ public class MainActivity extends AppCompatActivity {
     private void dataOption(int option){
         switch (option) {
             case TOP_REFRESH:
-                //下拉刷新
                 imageItemList.clear();
                 doGet();
                 break;
             case BOTTOM_REFRESH:
-                //上拉加载更多
                 pages++;
                 doGet();
                 break;
@@ -158,84 +135,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                // TODO Auto-generated method stub
 
-                Log.i("TAG","getVolleyData"+response);
-                //Json的解析类对象
                 JsonParser parser = new JsonParser();
-                //将JSON的String 转成一个JsonArray对象
                 JsonArray jsonArray = parser.parse(response).getAsJsonArray();
                 Gson gson = new Gson();
-                ArrayList<ImageJsonBean> imageJsonBeanArrayList = new ArrayList<>();
                 for (JsonElement user : jsonArray) {
-                    //使用GSON，直接转成Bean对象
                     ImageJsonBean imageJsonBean = gson.fromJson(user, ImageJsonBean.class);
                     ImagesBean imagesBean = imageJsonBean.getImages();
                     String imageUrl = imagesBean.getTeaser();
-                    Log.i("imageUrl","imageUrl="+imageUrl);
                     ListImageItem listImageItem = new ListImageItem(imageUrl);
                     imageItemList.add(listImageItem);
-
                 }
 
             }
         }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("error>", error.toString());
-
             }
         });
         myStringRequest.headers.put("Authorization", "Bearer "+token);
         MyApplication.getHttpQueues().add(myStringRequest);
     }
-
-
-
-
-/*
-    *//**
-     * Get data
-     * @param token token
-     * @param url url
-     * @throws Exception
-     *//*
-    public void getData(String token, String url) throws Exception {
-
-        Request request = new Request.Builder()
-                .header("Authorization", "Bearer " + token)
-                .url(url)
-                .build();
-
-        Response response = mOkHttpClient.newCall(request).execute();
-
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-        result = response.body().string();
-    }
-
-    *//**
-     * parse data
-     * @param jsonData json data
-     * @return  list
-     *//*
-    public void parseData(String jsonData){
-        try {
-            JSONTokener jsonTokener = new JSONTokener(jsonData);
-            JSONArray array =(JSONArray) jsonTokener.nextValue();
-            for (int i =0; i< array.length(); i++){
-                JSONObject object = array.getJSONObject(i);
-                JSONObject images = object.getJSONObject("images");
-                String teaser = images.getString("teaser");
-                ListImageItem listImageItem = new ListImageItem(teaser);
-                imageItemList.add(listImageItem);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }*/
 
 
 }

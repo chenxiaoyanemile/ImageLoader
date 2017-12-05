@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.netcircle.imageloader.app.Constants;
@@ -18,10 +17,8 @@ import com.netcircle.imageloader.model.ListImageItem;
 import com.netcircle.imageloader.util.VolleySingleton;
 import com.squareup.picasso.Picasso;
 
-
 import java.util.ArrayList;
 
-import static android.R.id.list;
 
 /**
  * Created by sweetgirl on 2017/11/2
@@ -75,18 +72,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         ListImageItem currentTextImage=imageItems.get(position);
         holder.itemView.setTag(position);
 
-        //String  url1=currentTextImage.getImage_url_01();
-       /* String  url2 = currentTextImage.getImage_url_02();
-        String  url3 = currentTextImage.getImage_url_03();*/
-
-       // loadImages(url1,holder.mImage01);
-       // loadImages(url2,holder.mImage02);
-       // loadImages(url3,holder.mImage03);
-
         Picasso.with(mContext)
-                //load()下载图片
                 .load(imageItems.get(position).getImage_url_01())
-                //init()显示到指定控件
+                .placeholder(R.drawable.im_01)
                 .into(holder.mImage01);
 
     }
@@ -125,15 +113,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     class ViewHolder extends RecyclerView.ViewHolder{
         ImageView mImage01;
-       /* ImageView mImage02;
-        ImageView mImage03;*/
 
         public ViewHolder(View itemView){
             super(itemView);
             mImage01 = (ImageView)itemView.findViewById(R.id.im_item_01);
-            /*
-            mImage02 = (ImageView)itemView.findViewById(R.id.im_item_02);
-            mImage03=(ImageView)itemView.findViewById(R.id.im_item_03);*/
 
 
            itemView.setOnClickListener(new View.OnClickListener() {

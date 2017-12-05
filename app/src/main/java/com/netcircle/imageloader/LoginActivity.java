@@ -42,8 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mUserDao = MyApplication.getInstances().getDaoSession().getUserDao();
         initEvent();
         getData();
-        //注册事件
-        EventBus.getDefault().register(this);
+
     }
 
     private void initView(){
@@ -110,13 +109,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void startAction(){
         Intent intent = new Intent(LoginActivity.this, RegisteredActivity.class);
         startActivity(intent);
-        finish();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMoonEvent(MessageEvent messageEvent){
-        id =messageEvent.getMessage();
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onEvent(MessageEvent messageEvent){
+        String msg = messageEvent.getMessage();
+        Toast.makeText(this,"返回的数据"+msg,Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     protected void onDestroy() {

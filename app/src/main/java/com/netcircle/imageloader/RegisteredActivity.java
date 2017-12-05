@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.netcircle.imageloader.app.MyApplication;
 import com.netcircle.imageloader.dao.User;
 import com.netcircle.imageloader.gen.UserDao;
-import com.netcircle.imageloader.util.MessageEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -56,7 +55,7 @@ public class RegisteredActivity extends AppCompatActivity {
                     else {
                         mUserDao.insert(new User(Long.valueOf(id), username,password));
                         Toast.makeText(RegisteredActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                        EventBus.getDefault().post(new MessageEvent(id));
+                        EventBus.getDefault().post("你好啊？");
                         startAction();
                     }
                 }
