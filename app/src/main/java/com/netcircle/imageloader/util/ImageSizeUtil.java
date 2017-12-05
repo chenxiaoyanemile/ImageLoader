@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 public class ImageSizeUtil {
 
 
-    public static int caculateInSampleSize(BitmapFactory.Options options, int reqWidth,
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
                                            int reqHeight)
     {
         int width = options.outWidth;
