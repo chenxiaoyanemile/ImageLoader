@@ -79,6 +79,17 @@ public class RegisteredActivity extends AppCompatActivity {
         });
     }
 
+    public void getData(View view){
+        input_name = (EditText)findViewById(R.id.et_input_name);
+        input_password = (EditText)findViewById(R.id.et_input_password);
+        btn_registered = (Button)findViewById(R.id.btn_registered);
+        et_input_id = (EditText)findViewById(R.id.et_input_id);
+        id = et_input_id.getText().toString();
+        username = input_name.getText().toString();
+        password = input_password.getText().toString();
+        btn_registered.setText("hello"+id);
+    }
+
     private void initView(){
         input_name = (EditText)findViewById(R.id.et_input_name);
         input_password = (EditText)findViewById(R.id.et_input_password);
